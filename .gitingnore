@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+env/
+.ruff_cache/
+.mypy_cache/
+
+# Tools & caches
+.cache/
+.pre-commit/
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Project artifacts
+runs/
+outputs/
+data/
+

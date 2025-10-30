@@ -1,0 +1,22 @@
+[project]
+name = "noise-sched"
+version = "0.0.1"
+description = "Noise schedule study (timebox: 2025-10-29 → 2025-11-24)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "matplotlib>=3.8",
+  "numpy>=1.26",
+  "pytest>=8.0",
+]
+ 
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 250
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"

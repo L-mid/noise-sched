@@ -12,14 +12,15 @@ env/
 .pre-commit/
 *.log
 
-# OS / IDE
-.DS_Store
-Thumbs.db
+# IDE/OS
 .vscode/
 .idea/
+.DS_Store
+Thumbs.db
 
 # Project artifacts
 runs/
 outputs/
 data/
-
+checkpoints/
+plots/

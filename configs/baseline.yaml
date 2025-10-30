@@ -1,0 +1,39 @@
+experiment:
+  name: "baseline-linear-50nfe"
+  seed: 20251029
+
+data:
+  name: "cifar10"
+  root: "data/cifar10"
+  batch_size: 128
+  num_workers: 4
+  shuffle: true
+
+model:
+  name: "unet_256"
+  ema: true
+  ema_decay: 0.999
+  # ...
+
+diffusion:
+  steps: 50             # NFE for sampling
+  beta_schedule: "linear"   # swap to "cosine" / "learned"
+  # for learned, you’ll set a ckpt path below in 'train' or 'sampler'
+  # ask about this
+
+train:
+  total_steps: 100_000
+  lr: 1.0e-4
+  grad_clip: 1.0  # add these?
+  amp: true
+  checkpoint_dir: "checkpoints/baseline"
+  log_every: 100
+  ckpt_every: 5000  
+
+
+eval:
+  fid:
+    enabled: true
+    every: 5000
+  holdout:
+    enabled: false  

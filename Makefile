@@ -1,6 +1,14 @@
-PY=python
+PY := .venv/Scripts/python.exe
 
-setup:
+deps-cpu:
+	$(PY) -m pip install -U pip
+	$(PY) -m pip install -e external/ablation-harness[torch-cpu]
+	$(PY) -m pip install -e .
+
+deps-gpu:
+	$(PY) -m pip install -U pip
+	@echo ">>> Install torch/vision/audio for your CUDA from pytorch.org, then:"
+	$(PY) -m pip install -e external/ablation-harness
 	$(PY) -m pip install -e .
 
 run-baseline:

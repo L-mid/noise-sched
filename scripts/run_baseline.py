@@ -1,7 +1,12 @@
+"""
+python -m ablation_harness.cli run --config configs/baseline.yaml
+"""
+
+
 import argparse, sys
 from pathlib import Path
 from ablation_harness import cli as ah_cli   # <-- must succeed
-#print(ah_cli)
+
 
 def main():
     p = argparse.ArgumentParser()

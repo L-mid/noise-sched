@@ -12,6 +12,10 @@ env/
 .pre-commit/
 *.log
 *.pyc
+.gz
+cifar-10-batches-py/
+.tar
+cifar-10-python.tar.gz
 
 # IDE/OS
 .vscode/

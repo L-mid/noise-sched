@@ -6,10 +6,19 @@ Some usage before i forget:
 python -m pip install -e .
 
 # E2E baseline (S1)
-python scripts/run_baseline.py --config configs/baseline.yaml
+(makefile):
+    python scripts/run_baseline.py --config configs/baseline.yaml
+OR (direct variants)
+    python -m ablation_harness.cli plan --config configs/baseline_test.yaml
+    python -m ablation_harness.cli run  --config configs/baseline_test.yaml
+
+python -m ablation_harness.cli --help
 
 # Plot a diagnostic
 python -m noise_sched.plots.snr_plot --name cosine_beta --T 1000
+
+
+Install: python -m pip install -e external/ablation-harness ".[dev]" 
 
 """
 

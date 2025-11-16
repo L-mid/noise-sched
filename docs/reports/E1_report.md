@@ -22,16 +22,16 @@ Other:
 ## Symptom
 
 Training loss decreased smoothly from ≈0.19 → ≈0.05 over 10k steps. 
-![alt text](../assets/E1/plots/loss.png)
+![alt text](../assets/E1/E1_plots/loss.png)
 
 But the CIFAR-10 sample grids produced during training (DDPM, NFE=50) looked
 like pure RGB noise, with only a slight darkening at later steps.
 
 @1k steps:
-![alt text](../assets/E1/plots/grid.png)
+![alt text](../assets/E1/E1_plots/grid.png)
 
 @10k steps:
-![alt text](<../assets/E1/plots/grid (1).png>)
+![alt text](<../assets/E1/E1_plots/grid (1).png>)
 
 
 Naïve interpretation: *“training is working but the sampler/q path is broken
@@ -95,7 +95,6 @@ Qualitative observations:
     ![alt text](../assets/E1/debug_denoise/debug_denoise_t500.png)
 
 - **t ≈ 750:** structure degrades; x̂₀ becomes mushy color blobs.
-
     ![alt text](../assets/E1/debug_denoise/debug_denoise_t750.png)
 
 - **t ≈ 999:** x̂₀ collapses into psychedelic blobs with almost no

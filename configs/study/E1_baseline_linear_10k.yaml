@@ -73,7 +73,7 @@ eval:
     sampler: ddpm
     nfe: 50
     n_samples: 5000
-    fid_stats: "cifar10_inception_stats.npz"
+    fid_stats: "external/ablation-harness/stats/cifar10_inception_train.npz"
 
   # Final/hold-out at end of training
   final:
@@ -82,7 +82,7 @@ eval:
     sampler: ddpm
     nfe: 50
     n_samples: 10000
-    fid_stats: "cifar10_inception_stats.npz"
+    fid_stats: "external/ablation-harness/stats/cifar10_inception_train.npz"
 
 
 variants: []
@@ -100,8 +100,8 @@ logging:
     mode: online
     project: noise_sched
     run_name: "Test-E1-linear-10k"
-    tags: ["test", "pre-final test"]    # ["E1", "baseline", "linear", "10k"]
-    notes: "This run was a pre test"    # "E1 baseline-linear-50nfe prereg run"
+    tags: ["E1", "baseline", "linear", "10k"]
+    notes: "E1 baseline-linear-50nfe prereg run"
   tensorboard:
     flush_secs: 10
 

@@ -22,7 +22,7 @@ Other:
 ## Symptom
 
 Training loss decreased smoothly from ≈0.19 → ≈0.05 over 10k steps. 
-![alt text](../assets/E1/plots/loss.png)
+![alt text](../assets/E1/E1_plots/loss.png)
 
 But the CIFAR-10 sample grids produced during training (DDPM, NFE=50) looked
 like pure RGB noise, with only a slight darkening at later steps.

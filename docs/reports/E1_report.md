@@ -22,16 +22,16 @@ Other:
 ## Symptom
 
 Training loss decreased smoothly from ≈0.19 → ≈0.05 over 10k steps. 
-![alt text](../assets/E1/plots/loss.png)
+![alt text](../assets/E1/E1_plots/loss.png)
 
 But the CIFAR-10 sample grids produced during training (DDPM, NFE=50) looked
 like pure RGB noise, with only a slight darkening at later steps.
 
-@1k steps:
-![alt text](../assets/E1/plots/grid.png)
+# @1k steps:
+![alt text](../assets/E1/E1_plots/grid.png)
 
-@10k steps:
-![alt text](<../assets/E1/plots/grid (1).png>)
+# @10k steps:
+![alt text](<../assets/E1/E1_plots/grid (1).png>)
 
 
 Naïve interpretation: *“training is working but the sampler/q path is broken
@@ -83,24 +83,23 @@ Qualitative observations:
 
 - **t = 0:** x₀, x_t, and x̂₀ are essentially identical (model acts as
   near-identity at zero noise).
-    ![alt text](../assets/E1/debug_denoise/debug_denoise_t0.png)
+- ![alt text](../assets/E1/debug_denoise/debug_denoise_t0.png)
 
 - **t ≈ 250:** x_t is clearly corrupted, but x̂₀ still shows recognizable
   CIFAR objects (truck, car, horse, etc.) with correct colors and coarse
   shapes.
-    ![alt text](../assets/E1/debug_denoise/debug_denoise_t250.png)
+- ![alt text](../assets/E1/debug_denoise/debug_denoise_t250.png)
 
 - **t ≈ 500:** reconstructions are blurrier, but maintain rough object
   structure and color.
-    ![alt text](../assets/E1/debug_denoise/debug_denoise_t500.png)
+- ![alt text](../assets/E1/debug_denoise/debug_denoise_t500.png)
 
 - **t ≈ 750:** structure degrades; x̂₀ becomes mushy color blobs.
-
-    ![alt text](../assets/E1/debug_denoise/debug_denoise_t750.png)
+- ![alt text](../assets/E1/debug_denoise/debug_denoise_t750.png)
 
 - **t ≈ 999:** x̂₀ collapses into psychedelic blobs with almost no
   recognizable content.
-    ![alt text](../assets/E1/debug_denoise/debug_denoise_t999.png)
+- ![alt text](../assets/E1/debug_denoise/debug_denoise_t999.png)
 
 This shows the EMA model has learned to denoise **low and mid timesteps**
 reasonably well, but fails at the very high-noise end of the diffusion
@@ -111,7 +110,7 @@ broken pipeline.
 
 To decouple harness code from core logic, we also did a manual sampling
 test:
-![alt text](../assets/E1/debug_samples.png)
+- ![alt text](../assets/E1/debug_samples.png)
 
 - Loaded the same EMA checkpoint used for training eval.
 - Built q with K=1000 linear β and constructed a `DDPMSampler` with NFE=50.

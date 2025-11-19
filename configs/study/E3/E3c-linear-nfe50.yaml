@@ -71,7 +71,7 @@ eval:
     enabled: true
     at_end: true
     sampler: ddpm
-    nfe: 10                # <-- sweep value (10)
+    nfe: 50                # <-- sweep value (10)
     n_samples: 5000        # <-- pilot speed
     fid_stats: "external/ablation-harness/stats/cifar10_inception_train.npz"
 

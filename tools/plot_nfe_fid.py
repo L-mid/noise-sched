@@ -16,6 +16,7 @@ python tools/plot_nfe_fid.py runs/2025-11-01_E3a-linear-nfe10 \
                              runs/2025-11-01_E3c-linear-nfe50 \
   --out-plot nfe_fid_linear.png --out-csv nfe_fid_linear.csv
 
+  
 python tools/plot_nfe_fid.py <runA> <runB> <runC> \
   --make-montage --grid-name grid.png
 # => writes: grids_montage.png

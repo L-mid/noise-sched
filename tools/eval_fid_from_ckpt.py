@@ -19,7 +19,6 @@ python -m tools.eval_fid_from_ckpt \
   --n-samples 256 \
   --batch-size 64 \
   --beta-schedule linear \
-  --save-grid 
 
 
 Fid stats (on cpu): 

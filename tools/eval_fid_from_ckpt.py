@@ -16,20 +16,32 @@ python -m tools.eval_fid_from_ckpt \
   --ckpt docs/assets/E3/noise-sched-e3a/ckpts/last.pt \
   --fid-stats external/ablation-harness/stats/cifar10_inception_train.npz \
   --nfe 10 20 50 \
-  --n-samples 32 \
+  --n-samples 256 \
   --batch-size 64 \
   --beta-schedule linear \
   --save-grid 
 
 
-Fid stats: 
+Fid stats (on cpu): 
 Normal (n samples = 32):  
 imgs mean/std: 0.49897313117980957 0.3493768274784088
 [summary] NFE=  10  FID=195.725134
 [summary] NFE=  20  FID=203.987357
 [summary] NFE=  50  FID=203.081029
 
+Fid stats (on gpu):
 
+(special log message, does NOT occur on CPU):
+[eval] ===== NFE = 10 =====
+[fid] Generating 256 images -- 4 batches
+[fid] batch 1/4 (size=64)
+Downloading: "https://download.pytorch.org/models/inception_v3_google-0cc3c7bd.pth" to /root/.cache/torch/hub/checkpoints/inception_v3_google-0cc3c7bd.pth
+100% 104M/104M [00:00<00:00, 195MB/s] 
+
+Normal (n samples = 256)
+[summary] NFE=  10  FID=-211.007803
+[summary] NFE=  20  FID=-211.007803
+[summary] NFE=  50  FID=-211.007803
 
 
 """
@@ -45,6 +57,11 @@ from types import SimpleNamespace
 import numpy as np
 import torch
 from torchvision.utils import save_image
+
+import inspect
+import ablation_harness.eval.generative as gen
+print("[eval] generative module path:", inspect.getsourcefile(gen))
+
 
 # --- imports from your codebase ---
 from ablation_harness.eval.generative import (

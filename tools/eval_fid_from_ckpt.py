@@ -18,7 +18,7 @@ python -m tools.eval_fid_from_ckpt \
   --nfe 10 20 50 \
   --n-samples 256 \
   --batch-size 64 \
-  --beta-schedule linear \
+  --beta-schedule linear 
 
 
 Fid stats (on cpu): 

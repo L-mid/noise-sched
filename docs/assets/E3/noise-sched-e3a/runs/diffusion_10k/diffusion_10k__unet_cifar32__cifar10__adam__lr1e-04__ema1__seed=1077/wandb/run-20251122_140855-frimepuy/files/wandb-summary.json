@@ -1,0 +1,1 @@
+{"_timestamp":1.763821059406085e+09,"_step":100,"train/loss":0.02697695791721344,"val/fid_final":203.68285697861324,"_wandb":{"runtime":523},"_runtime":523,"step":10000}

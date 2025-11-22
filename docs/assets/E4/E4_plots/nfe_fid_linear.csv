@@ -1,0 +1,4 @@
+nfe,fid,label,run_path
+10,193.6011111677472,E4a-cosine-10k-nfe10,docs\assets\E4\noise-sched-e4a\runs
+20,193.48741365536955,E4b-cosine-10k-nfe20,docs\assets\E4\noise-sched-e4b\runs
+50,193.65363670913615,E4c-cosine-10k-nfe50,docs\assets\E4\noise-sched-e4c\runs

@@ -1,0 +1,117 @@
+_wandb:
+    value:
+        cli_version: 0.22.3
+        e:
+            cwrdkwqjthm75yd00jbddruqf2xi6ipq:
+                args:
+                    - run
+                    - --config
+                    - configs/study/E3_linear_nfe_sweep_10k.yaml
+                    - --out_dir
+                    - runs/del_test
+                cpu_count: 10
+                cpu_count_logical: 12
+                disk:
+                    /:
+                        total: "510549889024"
+                        used: "317568831488"
+                email: midjourney4321@gmail.com
+                executable: C:\Users\grayd\OneDrive\noise-sched\.venv\Scripts\python.exe
+                git:
+                    commit: 5d2371ed86915c11f0b11be2e69c701a259abde8
+                    remote: https://github.com/L-mid/noise-sched
+                host: computer
+                memory:
+                    total: "25448882176"
+                os: Windows-11-10.0.26100-SP0
+                program: -m ablation_harness.cli
+                python: CPython 3.13.2
+                root: C:\Users\grayd\OneDrive\noise-sched\runs\del_test\diffusion_5k_nfe_x\diffusion_5k_nfe_x__unet_cifar32__cifar10__adam__lr1e-04__ema1__seed=1077
+                startedAt: "2025-11-17T16:49:28.362497Z"
+                writerId: cwrdkwqjthm75yd00jbddruqf2xi6ipq
+        m: []
+        python_version: 3.13.2
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 15
+            "4": 3.13.2
+            "5": 0.22.3
+            "8":
+                - 3
+            "12": 0.22.3
+            "13": windows-amd64
+amp:
+    value: false
+batch_size:
+    value: 4
+beta_schedule:
+    value: linear
+clean_run:
+    value: false
+dataset:
+    value: cifar10
+deterministic:
+    value: true
+device:
+    value: cpu
+dropout:
+    value: 0
+ema_decay:
+    value: 0.9999
+ema_enabled:
+    value: true
+epochs:
+    value: 4
+eval_every:
+    value: 5000
+eval_n_samples:
+    value: 10000
+eval_nfe:
+    value: 50
+eval_sampler:
+    value: ddpm
+fid_stats:
+    value: null
+grad_clip:
+    value: 1
+hidden:
+    value: 64
+lr:
+    value: 0.0001
+model_name:
+    value: unet_cifar32
+momentum:
+    value: 0.9
+num_workers:
+    value: 0
+opt_name:
+    value: adam
+out_dir:
+    value: runs\del_test\diffusion_5k_nfe_x
+pin_memory:
+    value: false
+run_id:
+    value: diffusion_5k_nfe_x__unet_cifar32__cifar10__adam__lr1e-04__ema1__seed=1077
+sched_name:
+    value: cosine
+seed:
+    value: 1077
+shuffle:
+    value: true
+study_name:
+    value: diffusion_5k_nfe_x
+subset:
+    value: null
+task:
+    value: diffusion
+total_steps:
+    value: 10000
+wd:
+    value: 0

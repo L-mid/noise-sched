@@ -26,8 +26,7 @@ build/
 Thumbs.db
 
 # Project artifacts
-runs/
 outputs/
 data/
 checkpoints/
-plots/
+

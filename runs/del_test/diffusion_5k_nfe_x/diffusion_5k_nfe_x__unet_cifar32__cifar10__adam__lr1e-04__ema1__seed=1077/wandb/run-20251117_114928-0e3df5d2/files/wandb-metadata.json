@@ -1,0 +1,33 @@
+{
+  "os": "Windows-11-10.0.26100-SP0",
+  "python": "CPython 3.13.2",
+  "startedAt": "2025-11-17T16:49:28.362497Z",
+  "args": [
+    "run",
+    "--config",
+    "configs/study/E3_linear_nfe_sweep_10k.yaml",
+    "--out_dir",
+    "runs/del_test"
+  ],
+  "program": "-m ablation_harness.cli",
+  "git": {
+    "remote": "https://github.com/L-mid/noise-sched",
+    "commit": "5d2371ed86915c11f0b11be2e69c701a259abde8"
+  },
+  "email": "midjourney4321@gmail.com",
+  "root": "C:\\Users\\grayd\\OneDrive\\noise-sched\\runs\\del_test\\diffusion_5k_nfe_x\\diffusion_5k_nfe_x__unet_cifar32__cifar10__adam__lr1e-04__ema1__seed=1077",
+  "host": "computer",
+  "executable": "C:\\Users\\grayd\\OneDrive\\noise-sched\\.venv\\Scripts\\python.exe",
+  "cpu_count": 10,
+  "cpu_count_logical": 12,
+  "disk": {
+    "/": {
+      "total": "510549889024",
+      "used": "317568831488"
+    }
+  },
+  "memory": {
+    "total": "25448882176"
+  },
+  "writerId": "cwrdkwqjthm75yd00jbddruqf2xi6ipq"
+}

@@ -15,7 +15,7 @@ data:
   dataset: "cifar10"
   subset: null
   batch_size: 4
-  num_workers: 0
+  num_workers: 2
   shuffle: true
 
 model:
@@ -65,7 +65,7 @@ eval:
     sampler: ddpm
     nfe: 50
     n_samples: 5000
-    fid_stats: "external/ablation-harness/stats/cifar10_inception_train.npz"
+    fid_stats: "stats/cifar10_inception_train.npz"
 
   final:
     enabled: true
@@ -73,7 +73,7 @@ eval:
     sampler: ddpm
     nfe: 50                # <-- sweep value (10)
     n_samples: 5000        # <-- pilot speed
-    fid_stats: "external/ablation-harness/stats/cifar10_inception_train.npz"
+    fid_stats: "stats/cifar10_inception_train.npz"
 
 variants: []
 

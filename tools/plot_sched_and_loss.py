@@ -16,10 +16,10 @@ python tools/plot_sched_and_loss.py \
 
 
 Current:
-    python tools/plot_sched_and_loss.py \
-  --loss docs/assets/E4/data/loss.jsonl /path/to/another/loss.jsonl \
+python tools/plot_sched_and_loss.py \
+  --loss docs/assets/E4/data/loss_cosine.jsonl docs/assets/E4/data/loss_linear.jsonl \
   --schedule external/ablation-harness/tasks/diffusion/schedule.py \
-  --outdir /E4/E4_plots 
+  --outdir docs/assets/E4/E4_plots 
 
 """
 
@@ -46,6 +46,39 @@ def read_jsonl(path: Path):
     return rows
 
 
+def _get_nested(d, path):
+    """Gets nested values from jsonl."""
+    cur = d
+    for k in path:
+        if not isinstance(cur, dict) or k not in cur:
+            return None
+        cur = cur[k]
+    return cur
+
+
+def _find_first_num(d, paths):
+    """Finds the first number."""
+    for p in paths:
+        v = _get_nested(d, p) if isinstance(p, (list, tuple)) else d.get(p, None)
+        if isinstance(v, (int, float)):
+            return float(v)
+    return None
+
+
+def _find_any_loss(d):
+    """DFS over nested dicts to find the first numeric key containing 'loss'"""
+    stack = [d]
+    while stack:
+        cur = stack.pop()
+        if isinstance(cur, dict):
+            for k, v in cur.items():
+                if isinstance(v, (int, float)) and "loss" in str(k).lower():
+                    return float(v)
+                if isinstance(v, dict):
+                    stack.append(v)
+    return None
+
+
 def infer_step_key(sample_row: dict):
     """Can infer a variety of step keys from loss.jsonl."""
     for k in ["step", "global_step", "train_step", "iteration", "iter", "steps", "_i"]:
@@ -57,33 +90,51 @@ def infer_step_key(sample_row: dict):
     return None
 
 
-def extract_loss_df(loss_jsonl: Path) -> pd.DataFrame:
-    """Finds the loss key and extracts it."""
-    rows = read_jsonl(loss_jsonl)
-    if not rows:
-        return pd.DataFrame(columns=["step","loss","source"])
-    step_key = infer_step_key(rows[0]) or "step"
-    loss_keys = ["loss", "train/loss", "train_loss", "objective", "l_total"]
+def extract_loss_df(loss_jsonl_path):
+    """Extracts loss from the loss.josnl"""
+    import json
+    rows = []
+    with open(loss_jsonl_path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rows.append(json.loads(line))
+            except Exception:
+                continue
+
     data = []
     for r in rows:
-        step = r.get(step_key, None)
-        lval = None
-        for lk in loss_keys:
-            if lk in r:
-                lval = r[lk]; break
-        if lval is None:
-            for k, v in r.items():
-                if isinstance(v, (int, float)) and "loss" in k.lower():
-                    lval = v; break
-        if step is not None and lval is not None:
-            data.append({"step": float(step), "loss": float(lval)})
+        step = _find_first_num(r, [
+            ["_i"], ["i"], ["step"], ["global_step"],
+            ["out","step"], ["out","global_step"], ["out","_i"],
+            ["out","iter"], ["out","iteration"]
+        ])
+        loss = _find_first_num(r, [
+            ["out","train/loss"], ["out","loss"], ["out","train_loss"],
+            ["loss"], ["train/loss"]
+        ])
+        if loss is None:
+            loss = _find_any_loss(r)
+
+        if step is None and "_i" in r and isinstance(r["_i"], (int, float)):
+            step = float(r["_i"])
+        if step is None:
+            # final fallback: use running index
+            step = float(len(data))
+
+        if loss is not None:
+            data.append({"step": step, "loss": float(loss)})
+
     df = pd.DataFrame(data).sort_values("step").reset_index(drop=True)
-    df["source"] = loss_jsonl.name
-    return df
+    df["source"] = loss_jsonl_path.name
+    return df    
 
 
 # ---------- schedule loading ----------
 def load_schedule_module(schedule_py: Path):
+    """Tries to import sched provided."""
     spec = importlib.util.spec_from_file_location("user_schedule", str(schedule_py))
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)  # type: ignore

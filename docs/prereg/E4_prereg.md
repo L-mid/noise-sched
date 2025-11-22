@@ -53,7 +53,7 @@ python -m ablation_harness.cli run \
 ```
 
 ```bash
-# Plotting:
+# Plotting fid + image montage:
 python tools/plot_nfe_fid.py docs/assets/E4/noise-sched-e4a/runs \
                              docs/assets/E4/noise-sched-e4b/runs \
                              docs/assets/E4/noise-sched-e4c/runs \
@@ -61,13 +61,22 @@ python tools/plot_nfe_fid.py docs/assets/E4/noise-sched-e4a/runs \
   --make-montage --grid-name grid.png 
 ```
 
+```bash
+python tools/plot_sched_and_loss.py \
+# Plotting loss + cosine graph:
+  --loss docs/assets/E4/data/loss_cosine.jsonl docs/assets/E4/data/loss_linear.jsonl \
+  --schedule external/ablation-harness/tasks/diffusion/schedule.py \
+  --outdir docs/assets/E4/E4_plots 
+```
+
+
 
 
 ## Definition of Done — E4 (Cosine NFE Sweep · Pilot)
 
 - [X] **Train (10k steps)** with cosine β using the prereg’d config; save run logs + git hash + config diff.
 - [X] **Evaluate at NFE = {10, 20, 50}**, 5k samples each, with the **locked FID stats**; write FID/KID/wall-time to `results.jsonl`.
-- [ ] **Artifacts saved:** 
+- [X] **Artifacts saved:** 
       1) NFE↔FID plot (cosine), 2) SNR(t) plot (cosine), 3) loss vs steps.
 - [ ] **Tests updated (≥3 for this exp):** schedule shape in-range/monotone, SNR correctness, sampler indexing + an E2E smoke.
 - [ ] **Short write-up (≥1 page):** purpose, setup, curves, quick interpretation; link plots and run hash.

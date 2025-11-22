@@ -26,6 +26,16 @@ python tools/plot_nfe_fid.py <runA> <runB> <runC> \
   --progression-max-frames 16
 # => writes: frames_nfe10_progression.png, etc.
 
+
+
+Current:
+python tools/plot_nfe_fid.py docs/assets/E3/noise-sched-e3a/runs \
+                             docs/assets/E3/noise-sched-e3b/runs \
+                             docs/assets/E3/noise-sched-e3c/runs \
+  --out-plot docs/assets/E3/E3_plots/nfe_fid_linear.png --out-csv docs/assets/E3/E3_plots/nfe_fid_linear.csv \
+  --make-montage --grid-name grid.png
+ 
+
 """
 
 

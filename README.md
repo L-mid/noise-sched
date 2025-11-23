@@ -11,3 +11,5 @@ Schedual driven results vs capacity tests. FID as qualitative metric.
 - [E3: Linear NFE {10, 20, 50} Sweep - FID({203.68, 200.94, 196.32})](https://github.com/L-mid/noise-sched/blob/main/docs/reports/E3_report.md)
 
 - [E4: Cosine NFE {10, 20, 50} Sweep - FID({193.60, 193.49, 193.65})](https://github.com/L-mid/noise-sched/blob/main/docs/reports/E4_report.md)
+
+- [E5: Cosine Σβ matched - FID(189.43)](https://github.com/L-mid/noise-sched/blob/main/docs/reports/E5_report.md)

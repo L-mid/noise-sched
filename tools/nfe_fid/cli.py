@@ -17,6 +17,16 @@ python -m tools.nfe_fid.cli progression out/frames_nfe10 out/frames_nfe20 out/fr
   
 path: noise-sched-e3<abc>/runs/diffusion_10k/diffusion_10k__unet_cifar32__cifar10__adam__lr1e-04__ema1__seed=1077/eval/step_x/grid.png
 
+
+Current:
+  python -m tools.nfe_fid.cli plot  \
+    docs/assets/E6/e1_data \
+    docs/assets/E6/e2_data \
+    docs/assets/E6/noise-sched-e6a/runs \
+    docs/assets/E6/noise-sched-e6b/runs \
+    --out-plot docs/assets/E6/e6_plots/nfe_fid_linear.png --out-csv docs/assets/E6/e6_plots/nfe_fid.csv
+
+
 """
 
 

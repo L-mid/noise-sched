@@ -97,3 +97,40 @@ No hyperparameter tuning for E5 specifically; only change is the β schedule kin
 - If E5 training diverges (loss NaN) and E1/E2 do not, treat E5 as failed variant and keep the report as “instability under Σβ match.” 
 
 
+
+## Definition of Done — E5 (Beta-Scale Match · Cosine Σβ ≃ Linear)
+
+- [] **Train (10k steps)** with `beta_schedule: "cosine_match_linear"` using the prereg’d config; save run logs, git hash, and full YAML.
+- [] **Log Σβ + SNR sanity:** record `sum_beta_linear`, `sum_beta_cosine`, `sum_beta_cosine_match_linear` and SNR(t) for all three schedules to disk (e.g. small JSON/NPY/CSV blob).
+- [] **Evaluate at NFE = 50** with 10k samples, EMA model, locked FID stats; write FID/KID/wall-time to this run’s `results.jsonl` with a clear `exp_id` (e.g. `"E5-beta-scale-match"`).
+- [] **Artifacts saved (min 3):**
+  1. Σβ comparison (linear vs cosine vs cosine_match_linear).
+  2. SNR(t) overlay plot for the three schedules.
+  3. Train loss vs steps (E5).
+  4. *(Optional but nice)* sample grids for E1/E2/E5 (same seed) in one figure.
+
+- [] **Tests updated (≥3 touched for this exp):**
+  - Schedule monotone/in-range test includes `"cosine_match_linear"`.
+  - Unit test that `Σβ(cosine_match_linear)` is within ~5% of `Σβ(linear)` (or logs the deviation).
+  - One E2E smoke that runs a tiny E5 job end-to-end with no errors.
+
+- [] **Short write-up (≥1 page):**  
+  Include, in order:
+  - Brief restatement of the question (mass vs shape) and E5 design.
+  - Exact schedule construction (Σβ-matching recipe, any clamping side-effects).
+  - Table or bullet list of FID(E1), FID(E2), FID(E5) at NFE=50.
+  - One SNR/Σβ figure with 2–3 sentence interpretation.
+  - A 2–3 sentence judgment: is E5 closer to E1 or E2, and what that says about “shape-matters” vs “mass-dominates”.
+  - Any caveats (e.g., Σβ mismatch >5%, training quirks).
+
+- [] **Public touch:**  
+  Post a short update (e.g. comment on the prereg GitHub issue) with:
+  - One plot (SNR or Σβ or FID table screenshot),
+  - 1–2 paragraph summary of the outcome,
+  - Links/paths to: E5 config, run directory, and `results.jsonl`.
+
+**Outcome labeling:**
+
+- **Supports “shape-matters”** if FID(E5) is clearly distinct from FID(E1) (e.g. >1 FID apart) and behaves more like E2, *despite* Σβ match.
+- **Supports “mass-dominates”** if FID(E5) is within ≈1 FID of E1 and both differ from E2.
+- **Inconclusive** if all three FIDs are within ≈1–2 points, or if training/diagnostics are too noisy to cleanly classify.

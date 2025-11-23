@@ -96,21 +96,59 @@ python -m ablation_harness.cli run \
   --out_dir /content/drive/MyDrive/noise-sched-e6/runs_linear_ddim
 ```
 
+### plotting fid together
+```bash
+  python -m tools.nfe_fid.cli plot  \
+    docs/assets/E6/e1_data \
+    docs/assets/E6/e2_data \
+    + new two
+    --out-plot docs/assets/E6/e6_plots/nfe_fid_linear.png --out-csv docs/assets/E6/e6_plots/nfe_fid_linear.csv
+```
+
+### plotting samples from linear - cosine - ddpm - ddim
+```bash
+python tools/plot_grids_together.py \
+    --ckpt-linear docs/assets/E6/e1_data/last.pt \
+    --ckpt-cosine docs/assets/E6/e2_data/last.pt \
+    --out-dir docs/assets/E6/e6_plots \
+    --out-name e6_linear_cosine_ddpm_ddim.png \
+    --K 1000 \
+    --nfe 50 \
+    --batch-size 36 \
+    --img-size 32 \
+    --seed 1077 \
+    --device cuda \
+    --title-linear-ddpm  "E1-linear — DDPM" \
+    --title-linear-ddim  "E1-linear — DDIM" \
+    --title-cosine-ddpm  "E2-cosine — DDPM" \
+    --title-cosine-ddim  "E2-cosine — DDIM"
+```
+
+### plotting fid heatmap
+```bash
+    python -m tools.plot_e6_heatmap \
+    --fid-linear-ddpm 193.1787 \        
+    --fid-linear-ddim 194.9572 \
+    --fid-cosine-ddpm 194.2269 \
+    --fid-cosine-ddim 194.1266 \
+    --out-plot docs/assets/E6/e6_plots/e6_fid_heatmap.png
+```
+
 
 ## 6. Definition of Done 
 
-- [ ] **Runs finished**
-  - [ ] `E6_sampler_parity_linear_ddim_10k.yaml` (E6-linear-ddim)
-  - [ ] `E6_sampler_parity_cosine_ddim_10k.yaml` (E6-cosine-ddim)
+- [X] **Runs finished**
+  - [X] `E6_sampler_parity_linear_ddim_10k.yaml` (E6-linear-ddim)
+  - [X] `E6_sampler_parity_cosine_ddim_10k.yaml` (E6-cosine-ddim)
 
-- [ ] **FID summary**
-  - [ ] Read FID@10k, NFE=50 for C1–C4 (linear/cosine × DDPM/DDIM).
-  - [ ] Save a tiny 2×2 table as CSV/JSON for the repo + paste into the write-up.
+- [X] **FID summary**
+  - [X] Read FID@10k, NFE=50 for C1–C4 (linear/cosine × DDPM/DDIM).
+  - [X] Save a tiny 2×2 table as CSV/JSON for the repo + paste into the write-up.
 
-- [ ] **Figure**
-  - [ ] Either:
-    - one 4-way sample grid (linear vs cosine × DDPM vs DDIM), **or**
-    - a simple bar/heatmap figure of the 4 FIDs.
+- [X] **Figure**
+  - [X]:
+    - one 4-way sample grid (linear vs cosine × DDPM vs DDIM),
+    - a heatmap figure of the 4 FIDs.
 
 - [ ] **Short write-up (~½–1 page)**
   - [ ] Restate the E6 question in 2–3 sentences.

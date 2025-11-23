@@ -1,0 +1,45 @@
+{
+  "os": "Linux-6.6.105+-x86_64-with-glibc2.35",
+  "python": "CPython 3.12.12",
+  "startedAt": "2025-11-23T16:30:25.020572Z",
+  "args": [
+    "run",
+    "--config",
+    "configs/study/E6/E6_sampler_parity_linear_ddim_10k.yaml",
+    "--out_dir",
+    "/content/drive/MyDrive/noise-sched-e6b/runs"
+  ],
+  "program": "-m ablation_harness.cli",
+  "git": {
+    "remote": "https://github.com/l-mid/noise-sched.git",
+    "commit": "0c08d86950a471d940c52a2a27912ce8c2e73ddf"
+  },
+  "email": "midjourney4321@gmail.com",
+  "root": "/content/drive/MyDrive/noise-sched-e6b/runs/diffusion_10k/diffusion_10k__unet_cifar32__cifar10__adam__lr1e-04__ema1__seed=1077",
+  "host": "9c2118332d5c",
+  "executable": "/usr/bin/python3",
+  "cpu_count": 1,
+  "cpu_count_logical": 2,
+  "gpu": "Tesla T4",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "120942624768",
+      "used": "49080561664"
+    }
+  },
+  "memory": {
+    "total": "13605851136"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "Tesla T4",
+      "memoryTotal": "16106127360",
+      "cudaCores": 2560,
+      "architecture": "Turing",
+      "uuid": "GPU-e23b2836-8788-68fe-270d-87aa55a0b35d"
+    }
+  ],
+  "cudaVersion": "12.4",
+  "writerId": "zy0wyd58a26igidy01fn0avbk1rydxxx"
+}

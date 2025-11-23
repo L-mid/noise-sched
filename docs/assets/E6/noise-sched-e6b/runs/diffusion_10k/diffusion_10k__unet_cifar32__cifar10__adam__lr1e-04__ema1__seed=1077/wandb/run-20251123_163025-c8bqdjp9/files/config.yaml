@@ -1,0 +1,139 @@
+_wandb:
+    value:
+        cli_version: 0.23.0
+        e:
+            zy0wyd58a26igidy01fn0avbk1rydxxx:
+                args:
+                    - run
+                    - --config
+                    - configs/study/E6/E6_sampler_parity_linear_ddim_10k.yaml
+                    - --out_dir
+                    - /content/drive/MyDrive/noise-sched-e6b/runs
+                cpu_count: 1
+                cpu_count_logical: 2
+                cudaVersion: "12.4"
+                disk:
+                    /:
+                        total: "120942624768"
+                        used: "49080561664"
+                email: midjourney4321@gmail.com
+                executable: /usr/bin/python3
+                git:
+                    commit: 0c08d86950a471d940c52a2a27912ce8c2e73ddf
+                    remote: https://github.com/l-mid/noise-sched.git
+                gpu: Tesla T4
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Turing
+                      cudaCores: 2560
+                      memoryTotal: "16106127360"
+                      name: Tesla T4
+                      uuid: GPU-e23b2836-8788-68fe-270d-87aa55a0b35d
+                host: 9c2118332d5c
+                memory:
+                    total: "13605851136"
+                os: Linux-6.6.105+-x86_64-with-glibc2.35
+                program: -m ablation_harness.cli
+                python: CPython 3.12.12
+                root: /content/drive/MyDrive/noise-sched-e6b/runs/diffusion_10k/diffusion_10k__unet_cifar32__cifar10__adam__lr1e-04__ema1__seed=1077
+                startedAt: "2025-11-23T16:30:25.020572Z"
+                writerId: zy0wyd58a26igidy01fn0avbk1rydxxx
+        m: []
+        python_version: 3.12.12
+        t:
+            "1":
+                - 1
+                - 2
+                - 3
+                - 5
+                - 12
+                - 41
+                - 49
+                - 53
+                - 105
+            "2":
+                - 1
+                - 2
+                - 3
+                - 5
+                - 12
+                - 41
+                - 49
+                - 53
+                - 105
+            "3":
+                - 2
+                - 13
+                - 15
+            "4": 3.12.12
+            "5": 0.23.0
+            "12": 0.23.0
+            "13": linux-x86_64
+amp:
+    value: true
+batch_size:
+    value: 4
+beta_schedule:
+    value: linear
+clean_run:
+    value: false
+dataset:
+    value: cifar10
+deterministic:
+    value: true
+device:
+    value: cuda
+dropout:
+    value: 0
+ema_decay:
+    value: 0.9999
+ema_enabled:
+    value: true
+epochs:
+    value: 4
+eval_every:
+    value: 5000
+eval_n_samples:
+    value: 10000
+eval_nfe:
+    value: 50
+eval_sampler:
+    value: ddpm
+fid_stats:
+    value: null
+grad_clip:
+    value: 1
+hidden:
+    value: 64
+lr:
+    value: 0.0001
+model_name:
+    value: unet_cifar32
+momentum:
+    value: 0.9
+num_workers:
+    value: 2
+opt_name:
+    value: adam
+out_dir:
+    value: /content/drive/MyDrive/noise-sched-e6b/runs/diffusion_10k
+pin_memory:
+    value: false
+run_id:
+    value: diffusion_10k__unet_cifar32__cifar10__adam__lr1e-04__ema1__seed=1077
+sched_name:
+    value: cosine
+seed:
+    value: 1077
+shuffle:
+    value: true
+study_name:
+    value: diffusion_10k
+subset:
+    value: null
+task:
+    value: diffusion
+total_steps:
+    value: 10000
+wd:
+    value: 0

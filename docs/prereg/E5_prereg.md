@@ -98,23 +98,58 @@ No hyperparameter tuning for E5 specifically; only change is the β schedule kin
 
 
 
+## All Commands 
+```bash
+# training 10k steps
+python -m ablation_harness.cli run \
+  --config configs/study/E5/E5_baseline_cosine_10k.yaml   \
+  --out_dir /content/drive/MyDrive/noise-sched-e5/runs
+```
+
+```bash
+# plotting schedules in overlay + sched data
+python tools/plot_and_log_schedules.py \
+  --K 1000 \
+  --out-prefix docs/assets/E5/e5_plots \
+  --json-path docs/assets/E5/e5_plots/e5_sigma_beta_snr.json \
+  --csv-path docs/assets/E5/e5_plots/e5_sigma_beta_snr.csv
+
+```
+
+```bash
+# plotting ddpm samples from linear, cosine, and match cosine
+python tools/plot_grids_together.py \
+    --ckpt-linear docs/assets/E5/ckpts/E1_linear.pt \
+    --ckpt-cosine docs/assets/E5/ckpts/E2_cosine.pt \
+    --ckpt-cosine-match docs/assets/E5/ckpts/E5_matched.pt \
+    --out-dir docs/assets/E5/e5_plots
+```
+
+```bash
+# Plotting loss graph:
+python -m ablation_harness.plots.plot_loss \
+  docs/assets/E5/data/loss.jsonl \
+  --out docs/assets/e5/e5_plots 
+```
+
+
 ## Definition of Done — E5 (Beta-Scale Match · Cosine Σβ ≃ Linear)
 
-- [] **Train (10k steps)** with `beta_schedule: "cosine_match_linear"` using the prereg’d config; save run logs, git hash, and full YAML.
-- [] **Log Σβ + SNR sanity:** record `sum_beta_linear`, `sum_beta_cosine`, `sum_beta_cosine_match_linear` and SNR(t) for all three schedules to disk (e.g. small JSON/NPY/CSV blob).
-- [] **Evaluate at NFE = 50** with 10k samples, EMA model, locked FID stats; write FID/KID/wall-time to this run’s `results.jsonl` with a clear `exp_id` (e.g. `"E5-beta-scale-match"`).
-- [] **Artifacts saved (min 3):**
+- [X] **Train (10k steps)** with `beta_schedule: "cosine_match_linear"` using the prereg’d config; save run logs, git hash, and full YAML.
+- [X] **Log Σβ + SNR sanity:** record `sum_beta_linear`, `sum_beta_cosine`, `sum_beta_cosine_match_linear` and SNR(t) for all three schedules to disk (e.g. small JSON/NPY/CSV blob).
+- [X] **Evaluate at NFE = 50** with 10k samples, EMA model, locked FID stats; write FID/KID/wall-time to this run’s `results.jsonl`.
+- [X] **Artifacts saved (min 3):**
   1. Σβ comparison (linear vs cosine vs cosine_match_linear).
   2. SNR(t) overlay plot for the three schedules.
   3. Train loss vs steps (E5).
   4. *(Optional but nice)* sample grids for E1/E2/E5 (same seed) in one figure.
 
-- [] **Tests updated (≥3 touched for this exp):**
+- [X] **Tests updated (≥3 touched for this exp):**
   - Schedule monotone/in-range test includes `"cosine_match_linear"`.
   - Unit test that `Σβ(cosine_match_linear)` is within ~5% of `Σβ(linear)` (or logs the deviation).
   - One E2E smoke that runs a tiny E5 job end-to-end with no errors.
 
-- [] **Short write-up (≥1 page):**  
+- [X] **Short write-up (≥1 page):**  
   Include, in order:
   - Brief restatement of the question (mass vs shape) and E5 design.
   - Exact schedule construction (Σβ-matching recipe, any clamping side-effects).
@@ -123,7 +158,7 @@ No hyperparameter tuning for E5 specifically; only change is the β schedule kin
   - A 2–3 sentence judgment: is E5 closer to E1 or E2, and what that says about “shape-matters” vs “mass-dominates”.
   - Any caveats (e.g., Σβ mismatch >5%, training quirks).
 
-- [] **Public touch:**  
+- [X] **Public touch:**  
   Post a short update (e.g. comment on the prereg GitHub issue) with:
   - One plot (SNR or Σβ or FID table screenshot),
   - 1–2 paragraph summary of the outcome,

@@ -17,9 +17,9 @@ python tools/plot_sched_and_loss.py \
 
 Current:
 python tools/plot_sched_and_loss.py \
-  --loss docs/assets/E4/data/loss_cosine.jsonl docs/assets/E4/data/loss_linear.jsonl \
   --schedule external/ablation-harness/tasks/diffusion/schedule.py \
-  --outdir docs/assets/E4/E4_plots 
+  --loss docs/assets/E5/data/loss.jsonl \
+  --outdir docs/assets/e5/e5_plots 
 
 """
 

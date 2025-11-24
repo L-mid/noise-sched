@@ -1,8 +1,15 @@
 #  noise-sched
 
-Schedual driven results vs capacity tests. FID as qualitative metric. 
+Schedule driven results vs small capacity + runtimes in a tiny tiny 32x32 UNet model on CIFAR10 data. 
+Another repo of mine: ablation-harness, was used as infrastructural base.
 
-### Reports:
+FID + qualitative metrics (me) used.
+
+
+(spoiler alert: no good pngs in these parts!). 
+
+
+## Reports:
 
 - [E1: Baseline Report - FID(193.18)](https://github.com/L-mid/noise-sched/blob/main/docs/reports/E1_report.md)
 
@@ -17,3 +24,16 @@ Schedual driven results vs capacity tests. FID as qualitative metric.
 - [E6: DDPM/DDIM parity over lin & cos - FID({193.17, 194.22}, {194.96, 194.13})](https://github.com/L-mid/noise-sched/blob/main/docs/reports/E6_report.md)
 
 - [E7: Linear 50k steps - FID(208.01)](https://github.com/L-mid/noise-sched/blob/main/docs/reports/E7_report.md)
+
+
+
+
+
+
+
+
+
+
+##### (and here's the spoiler!):
+
+##### ![alt text](docs/assets/E7/noise-sched-e7/runs/diffusion_10k/diffusion_10k__unet_cifar32__cifar10__adam__lr1e-04__ema1__seed=1077/eval/step_050000/grid/grid.png)

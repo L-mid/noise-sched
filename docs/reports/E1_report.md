@@ -34,15 +34,15 @@ like pure RGB noise, with only a slight darkening at later steps.
 ![alt text](<../assets/E1/E1_plots/grid (1).png>)
 
 
-Naïve interpretation: *“training is working but the sampler/q path is broken
+Naïve interpretation: *training is working but the sampler/q path is broken
 (e.g., wrong schedule, sampler ignoring the model, or parameterization
-mismatch).”*
+mismatch).*
 
 ## Integration tests
 
-To separate “math/implementation bug” from “weak model,” we added two
+To separate math/implementation bug from weak model, added two
 integration tests that use the real components (UNetCifar32, schedule,
-sampler):
+sampler) in isolation then together:
 
 1. **Model path test – UNet + `ddpm_loss` learns to denoise**
 
@@ -51,7 +51,7 @@ sampler):
      few dozen steps.
    - Measured MSE between reconstructed x̂₀ and ground-truth x₀ at a random
      timestep.
-   - **Result:** MSE(x̂₀, x₀) decreased after training.
+   - **Result: MSE(x̂₀, x₀) decreased after training.**
 
    This proves the forward process + `ddpm_loss` + time embedding + UNet +
    optimizer are wired consistently and can learn a denoiser.

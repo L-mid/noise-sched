@@ -15,7 +15,7 @@ data:
   dataset: "cifar10"
   subset: null      # full train
   batch_size: 4
-  num_workers: 0
+  num_workers: 2
   shuffle: true
 
 model:
@@ -39,7 +39,7 @@ optim:
 train:
   total_steps: 50000        # E7 spec: 50k steps
   grad_clip: 1.0
-  amp: false
+  amp: true
 
 # evaluation cfg:
 eval:

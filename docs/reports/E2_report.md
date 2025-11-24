@@ -61,6 +61,6 @@ Longer chains give the model more opportunity to enforce its learned
 low-frequency biases, but since the model is small and undertrained,
 it never produces realistic CIFAR-10 images.
 
-Note: For all FID numbers in this study, we fix **NFE=50** as
+Note: For all FID numbers in this study, I fixed only **NFE=50** as
 pre-registered. Any apparent improvement at NFE=1000 is qualitative
-only and does not affect the main metric.
+only and does not affect the main metric (just interesting!!).

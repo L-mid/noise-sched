@@ -1,7 +1,7 @@
 # E3 – Linear β, NFE sweep (10k steps)
 
 **Question.**  
-If we keep the trained model and schedule fixed (E1 baseline), how much does FID improve when we give the DDPM sampler more steps?
+If the trained model and schedule are kept fixed (E1 baseline), how much does FID improve when  the DDPM sampler has more steps?
 
 **Setup.**
 
@@ -17,7 +17,7 @@ If we keep the trained model and schedule fixed (E1 baseline), how much does FID
 | E3b-linear-10k-nfe20       | 20  | 200.94  |
 | E3c-linear-10k-nfe50       | 50  | 196.32  |
 
-FID decreases monotonically as we increase NFE, but with clear diminishing returns  
+FID decreases monotonically as increased NFE, but with clear diminishing returns  
 (≈2.7 points from 10→20, ≈4.6 from 20→50, ≈7.4 total from 10→50).
 
 (lol my clipped graph)
@@ -33,7 +33,7 @@ recognizable CIFAR-10 objects (see montage).
 **Takeaway.**  
 On this small, undertrained model, extra sampler steps help numerically but do not
 change the qualitative regime: spending 5× more NFE (10→50) buys ~7 FID points, yet
-samples remain far from realistic. Going forward, we’ll use NFE=50 as the default
-comparison point and look for schedule/model changes that shift the whole curve
+samples remain far from realistic. Going forward, I’ll use NFE=50 as the default
+comparison point as I was before and look for schedule/model changes that shift the whole curve
 down, not just along it.
 

@@ -67,7 +67,7 @@ eval:
     run_if_kid_improved_pct: 0.0   # <-- important: ignore KID gate
     sampler: ddpm
     nfe: 50
-    n_samples: 5000            # smaller than final, cheaper
+    n_samples: 5000           # smaller than final, cheaper
     fid_stats: "stats/cifar10_inception_train.npz"
   
   final:

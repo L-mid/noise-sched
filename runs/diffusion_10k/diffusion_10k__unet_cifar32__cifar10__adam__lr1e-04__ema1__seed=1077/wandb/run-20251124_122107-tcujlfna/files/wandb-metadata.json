@@ -1,0 +1,50 @@
+{
+    "os": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.9",
+    "heartbeatAt": "2025-11-24T17:21:08.573348",
+    "startedAt": "2025-11-24T17:21:07.039309",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "run",
+        "--config",
+        "configs/study/E7/E7_linear_50k.yaml",
+        "--out_dir",
+        "runs"
+    ],
+    "state": "running",
+    "program": "-m ablation_harness.cli",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/L-mid/noise-sched",
+        "commit": "3e7478eece89f40941b3dbb876ab7f1f0a3017df"
+    },
+    "email": "midjourney4321@gmail.com",
+    "root": "C:/Users/grayd/OneDrive/noise-sched",
+    "host": "computer",
+    "username": "grayd",
+    "executable": "C:\\Users\\grayd\\OneDrive\\noise-sched\\.venv\\Scripts\\python.exe",
+    "cpu_count": 10,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 1700.0,
+        "min": 0.0,
+        "max": 1700.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1700.0,
+            "min": 0.0,
+            "max": 1700.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 475.4866371154785,
+            "used": 302.91638565063477
+        }
+    },
+    "memory": {
+        "total": 23.70111846923828
+    }
+}

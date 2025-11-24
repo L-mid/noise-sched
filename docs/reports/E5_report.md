@@ -13,13 +13,13 @@
 
 #### Σβ + SNR sanity
 
-We first verified that the schedule really matches linear in total noise mass:
+I first verified that the schedule really matches linear in total noise mass using the:
 
 - Σβ(linear) ≈ **10.05**  
 - Σβ(cosine) ≈ **12.44**  
 - Σβ(cosine_match_linear) ≈ **10.05** (match within ~1e-6)
 
-So the E5 schedule keeps the **cosine shape** but rescales β so that the **total variance injected equals the linear baseline**.
+So the E5 schedule keeps the **cosine shape** but but rescales β so that the **total variance injected equals the linear baseline**.
 
 Plots:
 
@@ -38,7 +38,7 @@ Plots:
   - Both cosine schedules keep SNR **higher than linear** through most of the trajectory, then crash sharply at the end.  
   - `cosine_match_linear` sits slightly **above** the original cosine SNR almost everywhere, because the β’s are smaller but follow the same ᾱ(t) pattern.
 
-Together, these confirm that E5 is a clean control: **same Σβ as linear, cosine-style SNR path.**
+Together, these confirm that E5 is a clean control: it's the **same Σβ as linear, cosine-style SNR path.**
 
 ---
 

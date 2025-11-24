@@ -63,14 +63,14 @@ sampler):
    - Ran one real `DDPMSampler.step` and compared MSE to x₀ before vs after.
    - **Result:** MSE(x_prev, x₀) < MSE(x_t, x₀).
 
-   This proves the DDPM reverse step is numerically consistent with the
-   forward schedule: given a correct ε, it moves samples toward the data.
+   Proves the DDPM reverse step is numerically consistent with the
+   forward schedule because given a correct ε, it moves samples toward the data.
 
-These tests rule out “fundamental math bug in q/sampler/loss.”
+These tests rule out: fundamental math bug in q/sampler/loss.
 
-## Local denoising experiment (EMA model)
+## Local denoising experiment 
 
-To check what the **trained** model actually learned, we ran a local
+To check what the trained model actually learned, I ran a local
 denoise visualization with the EMA weights:
 
 - Sampled real CIFAR-10 images x₀ and normalized to [-1, 1].
@@ -103,12 +103,11 @@ Qualitative observations:
 
 This shows the EMA model has learned to denoise **low and mid timesteps**
 reasonably well, but fails at the very high-noise end of the diffusion
-chain. That’s consistent with a short, low-batch training run, not with a
-broken pipeline.
+chain. 
 
 ## Manual sampling experiment
 
-To decouple harness code from core logic, we also did a manual sampling
+To decouple harness code from core logic, I also did a manual sampling
 test:
 - ![alt text](../assets/E1/debug_samples.png)
 
@@ -138,7 +137,7 @@ Using the harness’s `eval.final` configuration:
 - n_samples for FID: 10,000
 - FID stats: `cifar10_inception_stats.npz`
 
-We obtained:
+Obtained:
 
 - **FID@NFE=50 (10k samples): 193.18**
 

@@ -15,3 +15,5 @@ Schedual driven results vs capacity tests. FID as qualitative metric.
 - [E5: Cosine Σβ matched - FID(189.43)](https://github.com/L-mid/noise-sched/blob/main/docs/reports/E5_report.md)
 
 - [E6: DDPM/DDIM parity over lin & cos - FID({193.17, 194.22}, {194.96, 194.13})](https://github.com/L-mid/noise-sched/blob/main/docs/reports/E6_report.md)
+
+- [E7: Linear 50k steps - FID(208.01)](https://github.com/L-mid/noise-sched/blob/main/docs/reports/E7_report.md)

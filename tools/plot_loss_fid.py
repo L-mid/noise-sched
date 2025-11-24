@@ -1,11 +1,22 @@
 """
 This plot will overlay the loss and fid from loss.jsonl + results.jsonl (if desired)
 
-python tools/plot_loss_fid_overlay.py \
-  runs/E6/loss.jsonl \
-  runs/E6/results.jsonl \
-  --out docs/assets/E6/loss_fid_overlay.png
+python tools/plot_loss_fid.py \
+  docs/assets/E7/e1_data/loss.jsonl \
+  docs/assets/E7/e1_data/results.jsonl \
+  docs/assets/E7/e7_data/loss.jsonl \
+  docs/assets/E7/e7_data/results.jsonl \
+  --out docs/assets/E7/e7_plots/loss_fid_overlay.png
 
+current (with names):
+python tools/plot_loss_fid.py \
+  docs/assets/E7/e1_data/loss.jsonl \
+  docs/assets/E7/e1_data/results.jsonl \
+  docs/assets/E7/e7_data/loss.jsonl \
+  docs/assets/E7/e7_data/results.jsonl \
+  --names E1-linear E7-linear-50k \
+  --out docs/assets/E7/e7_plots/loss_fid_overlay.png
+  
 
 """
 
@@ -18,20 +29,19 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 
 
-def load_loss_and_fid(loss_path: str):
+def load_loss_and_fid(loss_path):
     """Parse loss.jsonl for train loss and any fid-like metrics."""
-    steps_loss = []
-    losses = []
-    steps_fid = []
-    fids = []
+    steps_loss, losses = [], []
+    steps_fid, fids = [], []
 
     with open(loss_path, "r") as f:
         for line in f:
-            if not line.strip():
+            line = line.strip()
+            if not line:
                 continue
+
             rec = json.loads(line)
 
-            # step index
             step = rec.get("_i") or rec.get("global_step") or rec.get("step")
             out = rec.get("out", rec)
 
@@ -54,7 +64,7 @@ def load_loss_and_fid(loss_path: str):
     return (steps_loss, losses), (steps_fid, fids)
 
 
-def load_final_fid(results_path: str | None, default_step=None):
+def load_final_fid(results_path, default_step=None):
     """Parse results.jsonl for final FID (take the last FID it sees)."""
     if results_path is None:
         return None, None
@@ -64,8 +74,10 @@ def load_final_fid(results_path: str | None, default_step=None):
 
     with open(results_path, "r") as f:
         for line in f:
-            if not line.strip():
+            line = line.strip()
+            if not line:
                 continue
+
             rec = json.loads(line)
             out = rec.get("out") or rec.get("metrics") or rec
 
@@ -90,56 +102,108 @@ def load_final_fid(results_path: str | None, default_step=None):
     return final_step, final_fid
 
 
+def infer_label_from_path(loss_path: str) -> str:
+    """Nice default label from the directory name (e.g. 'e1_data')."""
+    p = Path(loss_path)
+    return p.parent.name or p.stem
+
+
 def main(argv=None):
-    parser = argparse.ArgumentParser()
-    parser.add_argument("loss_jsonl", help="path to loss.jsonl")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Overlay loss + intermittent FIDs (and final FIDs) "
+            "for one or more runs."
+        )
+    )
     parser.add_argument(
-        "results_jsonl",
-        nargs="?",
-        default=None,
-        help="optional results.jsonl with final FID",
+        "paths",
+        nargs="+",
+        help="Pairs: loss.jsonl results.jsonl [loss2.jsonl results2.jsonl ...]",
+    )
+    parser.add_argument(
+        "--names",
+        nargs="*",
+        help="Optional labels per run (same count as pairs).",
     )
     parser.add_argument(
         "--out",
         type=Path,
         required=True,
-        help="output PNG path, e.g. docs/assets/E6/loss_fid_overlay.png",
+        help="Output PNG path, e.g. docs/assets/E7/e7_plots/loss_fid_overlay.png",
     )
     args = parser.parse_args(argv)
 
-    (loss_steps, losses), (fid_steps, fids) = load_loss_and_fid(args.loss_jsonl)
-
-    # Use max loss step as fallback x-position for final FID if needed
-    default_step = max(loss_steps) if loss_steps else None
-    final_step, final_fid = load_final_fid(args.results_jsonl, default_step=default_step)
-
-    fig, ax1 = plt.subplots(figsize=(7, 4))
-
-    # Loss curve
-    if loss_steps:
-        ax1.plot(loss_steps, losses, label="train loss", linewidth=1.5)
-    ax1.set_xlabel("step")
-    ax1.set_ylabel("loss")
-
-    # FID on secondary axis
-    ax2 = ax1.twinx()
-    if fid_steps:
-        ax2.plot(fid_steps, fids, "o--", label="FID (intermittent)")
-    if final_fid is not None:
-        ax2.scatter(
-            [final_step],
-            [final_fid],
-            marker="*",
-            s=120,
-            label=f"FID final={final_fid:.2f}",
+    if len(args.paths) % 2 != 0:
+        parser.error(
+            "Need an even number of positional paths: "
+            "loss.jsonl results.jsonl [loss2.jsonl results2.jsonl ...]"
         )
-    ax2.set_ylabel("FID")
 
-    # Merge legends from both axes
-    lines1, labels1 = ax1.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
+    num_runs = len(args.paths) // 2
+    if args.names and len(args.names) != num_runs:
+        parser.error("--names must have the same length as the number of runs")
+
+    fig, ax_loss = plt.subplots(figsize=(7, 4))
+    ax_fid = ax_loss.twinx()
+
+    for i in range(num_runs):
+        loss_path = args.paths[2 * i]
+        results_path = args.paths[2 * i + 1]
+
+        label = (
+            args.names[i]
+            if args.names and i < len(args.names)
+            else infer_label_from_path(loss_path)
+        )
+
+        (loss_steps, losses), (fid_steps, fids) = load_loss_and_fid(loss_path)
+        default_step = max(loss_steps) if loss_steps else None
+        final_step, final_fid = load_final_fid(results_path, default_step)
+
+        # ---- plot loss ----
+        if loss_steps:
+            ax_loss.plot(
+                loss_steps,
+                losses,
+                linewidth=1.3,
+                label=f"loss ({label})",
+            )
+
+        # ---- plot intermittent FIDs ----
+        if fid_steps:
+            ax_fid.plot(
+                fid_steps,
+                fids,
+                "o--",
+                markersize=3,
+                linewidth=1.0,
+                label=f"FID intermittent ({label})",
+            )
+
+        # ---- plot final FID ----
+        if final_fid is not None:
+            ax_fid.scatter(
+                [final_step],
+                [final_fid],
+                marker="*",
+                s=100,
+                label=f"FID final ({label}) = {final_fid:.2f}",
+            )
+
+    ax_loss.set_xlabel("step")
+    ax_loss.set_ylabel("loss")
+    ax_fid.set_ylabel("FID")
+
+    # Merge legends
+    lines1, labels1 = ax_loss.get_legend_handles_labels()
+    lines2, labels2 = ax_fid.get_legend_handles_labels()
     if lines1 or lines2:
-        ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+        ax_loss.legend(
+            lines1 + lines2,
+            labels1 + labels2,
+            loc="best",
+            fontsize=8,
+        )
 
     fig.tight_layout()
     args.out.parent.mkdir(parents=True, exist_ok=True)

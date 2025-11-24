@@ -85,6 +85,6 @@ No directional hypothesis yet about cosine vs linear here — E7 is the “long,
 - [X] EMA with `decay=0.999` is used for evaluation (confirmed in logs / config).
 - [X] **FID@10k samples, NFE=50** is logged and summarized for E7. 
 - [X] Loss + FID vs step plots are saved and readable. 
-- [] One short paragraph written somewhere (notes / doc) comparing **E7 vs E1** (does longer training help, and by how much?).
+- [x] One short paragraph written somewhere (notes / doc) comparing **E7 vs E1** (does longer training help, and by how much?).
 
 Once all boxes are checked, E7 is “done” and ready to serve as the long-train linear baseline for E8/E9/E10.

@@ -1,0 +1,141 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.9
+    cli_version: 0.17.4
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1764004867
+    t:
+      1:
+      - 1
+      - 41
+      - 55
+      2:
+      - 1
+      - 41
+      - 55
+      3:
+      - 13
+      - 15
+      - 23
+      4: 3.11.9
+      5: 0.17.4
+      8:
+      - 3
+      - 5
+      13: windows-amd64
+study_name:
+  desc: null
+  value: diffusion_10k
+run_id:
+  desc: null
+  value: diffusion_10k__unet_cifar32__cifar10__adam__lr1e-04__ema1__seed=1077
+out_dir:
+  desc: null
+  value: runs\diffusion_10k
+seed:
+  desc: null
+  value: 1077
+epochs:
+  desc: null
+  value: 4
+device:
+  desc: null
+  value: cpu
+deterministic:
+  desc: null
+  value: true
+clean_run:
+  desc: null
+  value: false
+dataset:
+  desc: null
+  value: cifar10
+subset:
+  desc: null
+  value: null
+batch_size:
+  desc: null
+  value: 4
+num_workers:
+  desc: null
+  value: 2
+pin_memory:
+  desc: null
+  value: false
+model_name:
+  desc: null
+  value: unet_cifar32
+hidden:
+  desc: null
+  value: 64
+dropout:
+  desc: null
+  value: 0.0
+opt_name:
+  desc: null
+  value: adam
+lr:
+  desc: null
+  value: 0.0001
+wd:
+  desc: null
+  value: 0.0
+momentum:
+  desc: null
+  value: 0.9
+sched_name:
+  desc: null
+  value: cosine
+ema_enabled:
+  desc: null
+  value: true
+ema_decay:
+  desc: null
+  value: 0.999
+pin_mem:
+  desc: null
+  value: false
+include_buffers:
+  desc: null
+  value: false
+warmup_steps:
+  desc: null
+  value: 0
+task:
+  desc: null
+  value: diffusion
+total_steps:
+  desc: null
+  value: 50000
+eval_every:
+  desc: null
+  value: 5000
+grad_clip:
+  desc: null
+  value: 1.0
+amp:
+  desc: null
+  value: true
+beta_schedule:
+  desc: null
+  value: linear
+eval_sampler:
+  desc: null
+  value: ddpm
+eval_nfe:
+  desc: null
+  value: 50
+eval_n_samples:
+  desc: null
+  value: 10000
+fid_stats:
+  desc: null
+  value: null
+shuffle:
+  desc: null
+  value: true

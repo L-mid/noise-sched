@@ -24,4 +24,4 @@ An SNR(t) plot of the cosine schedule reveals an extreme dynamic range: SNR is e
 
 ![alt text](../assets/E4/E4_plots/snr_cosine.png)
 
-This matches the qualitative behavior of the model: it performs good local denoising at very low noise levels but fails to reconstruct structure once inputs become heavily noised, leading long sampling chains to converge to smooth, saturated blobs. Overall, E4 shows that with this tiny UNet and 10k steps, changing NFE within [10, 50] mostly re-weights how we traverse a badly modeled SNR landscape rather than unlocking qualitatively new generative behavior.
+This matches the qualitative behavior of the model: it performs good local denoising at very low noise levels but fails to reconstruct structure once inputs become heavily noised, leading long sampling chains to converge to smooth, saturated blobs. Overall, E4 shows that with this tiny UNet and 10k steps, changing NFE within [10, 50] mostly re-weights how it traverses a badly modeled SNR landscape rather than unlocking qualitatively new generative behavior.
